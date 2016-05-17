@@ -12,5 +12,15 @@ namespace Koopakiller.ForumSamples.OpenXml.PowerPoint
             zip.ExtractAll(tmp);
             return tmp;
         }
+
+        public static void Zip(string path, string file)
+        {
+            using (var loanZip = new Ionic.Zip.ZipFile())
+            {
+                loanZip.AddDirectory(path);
+                loanZip.Save(file);
+            }
+        }
+
     }
 }

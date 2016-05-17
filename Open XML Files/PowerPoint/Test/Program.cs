@@ -13,10 +13,12 @@ namespace Koopakiller.ForumSamples.OpenXml.PowerPoint.Test
             Console.WriteLine($"Filename: {args[0]}");
             var path = ZipFile.Extract(args[0]);
             //Process.Start(path);
-
-
+            
             var p = new Presentation(path);
             Print(p);
+
+            ZipFile.Zip(path, "Test.pptx");
+
             Console.ReadKey();
         }
 
