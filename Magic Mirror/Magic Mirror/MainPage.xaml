@@ -1,0 +1,131 @@
+﻿<Page
+    x:Class="Koopakiller.Apps.MagicMirror.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:Koopakiller.Apps.MagicMirror.ViewModels"
+    mc:Ignorable="d" Foreground="White">
+    <Page.DataContext>
+        <viewModels:MainViewModel/>
+    </Page.DataContext>
+    <Grid Background="#202020">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="30">
+            <TextBlock Text="{Binding CurrentTimeString}" FontSize="72" Foreground="White" HorizontalAlignment="Center" Margin="0 0 0 20"/>
+            <Border Width="300" Height="300">
+                <Grid>
+                    <Line X1="150" Y1="150" X2="150" Y2="50" StrokeThickness="8" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="{Binding CurrentTimeHourAngle}"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="150" X2="150" Y2="20" StrokeThickness="5" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="{Binding CurrentTimeMinuteAngle}"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="150" X2="150" Y2="23" StrokeThickness="2" Stroke="red" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="{Binding CurrentTimeSecondAngle}"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Ellipse StrokeThickness="2" Stroke="white"/>
+                    <Ellipse Fill="White" Width="20" Height="20"/>
+                    <Ellipse Fill="black" Width="7" Height="7"/>
+
+
+                    <Line X1="150" Y1="0" X2="150" Y2="18" StrokeThickness="4" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="0"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="30"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="60"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="18" StrokeThickness="4" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="120"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="150"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="18" StrokeThickness="4" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="180"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="210"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="240"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="18" StrokeThickness="4" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="270"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="300"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line X1="150" Y1="0" X2="150" Y2="10" StrokeThickness="2" Stroke="white" RenderTransformOrigin="0.5 0.5">
+                        <Line.RenderTransform>
+                            <RotateTransform Angle="330"/>
+                        </Line.RenderTransform>
+                    </Line>
+
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="30">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock" x:Key="LabelStyle">
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+                <Style TargetType="TextBlock" x:Key="DataStyle">
+                    <Setter Property="FontSize" Value="72"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="Summary" Style="{StaticResource LabelStyle}"/>
+            <TextBlock Text="{Binding CurrentWeather.Summary}" Style="{StaticResource DataStyle}" />
+            <TextBlock Text="Humidity" Style="{StaticResource LabelStyle}"/>
+            <TextBlock Style="{StaticResource DataStyle}" >
+                <Run Text="{Binding CurrentWeather.Humidity, Converter={StaticResource MultiplyConverter}, ConverterParameter=100}"/><Run Text="%"/>
+            </TextBlock>
+            <TextBlock Text="Temperature" Style="{StaticResource LabelStyle}"/>
+            <TextBlock Style="{StaticResource DataStyle}">
+                <Run Text="{Binding CurrentWeather.Temperature.Celsius}"/><Run Text="°C / "/><Run Text="{Binding CurrentWeather.Temperature.Fahrenheit}"/><Run Text="°F"/>
+            </TextBlock>
+        </StackPanel>
+        <ComboBox Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" SelectedIndex="0">
+            <ComboBoxItem Content="Deutsch"/>
+        </ComboBox>
+    </Grid>
+</Page>
