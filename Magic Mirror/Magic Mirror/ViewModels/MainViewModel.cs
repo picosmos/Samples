@@ -49,7 +49,7 @@ namespace Koopakiller.Apps.MagicMirror.ViewModels
 
         public double CurrentTimeSecondAngle => DateTime.Now.Second * 6D;
         public double CurrentTimeMinuteAngle => (DateTime.Now.Minute * 60 + DateTime.Now.Second) / 3600D * 360D;
-        public double CurrentTimeHourAngle => (DateTime.Now.Hour * 3600 + DateTime.Now.Minute * 60 + DateTime.Now.Second) / 86400D * 360D;
+        public double CurrentTimeHourAngle => (DateTime.Now.Hour % 12 * 3600 + DateTime.Now.Minute * 60 + DateTime.Now.Second) / 86400D * 360D * 2;
         public DateTime CurrentTime => DateTime.Now;
         public string CurrentTimeString => DateTime.Now.ToString("hh:mm:ss");
 

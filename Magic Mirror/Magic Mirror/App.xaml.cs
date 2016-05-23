@@ -21,7 +21,7 @@ namespace Koopakiller.Apps.MagicMirror
             //TODO: Inititialize sensitive Data
 
             //Claim it here: https://developer.forecast.io/
-            SensitiveData.ForecastIoApiKey = @"";
+            SensitiveData.ForecastIoApiKey = @"29cb1bc9528488eb43af3db89c7a5af5";
 
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
                 Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
