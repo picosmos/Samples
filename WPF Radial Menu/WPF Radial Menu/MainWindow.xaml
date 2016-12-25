@@ -7,6 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" MinWidth="200"/>
+        </Grid.ColumnDefinitions>
+
+        <local:RadialMenu SegmentCount="{Binding Value, ElementName=SegmentCountSlider}"
+                          RingCount="{Binding Value, ElementName=RingCountSlider}" 
+                          Margin="0,0,0,0.5" Grid.RowSpan="2"
+                          Click="RadialMenu_OnClick"/>
+
+        <StackPanel Grid.Column="1" Margin="0,0,0,0.5" Grid.Row="0">
+            <Label Content="SegmentCount:"/>
+            <Slider Minimum="1" Maximum="16" x:Name="SegmentCountSlider" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+            <Label Content="RingCount:"/>
+            <Slider Minimum="1" Maximum="10" x:Name="RingCountSlider" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+        </StackPanel>
+        <TextBox IsReadOnly="True" Grid.Row="1" Grid.Column="1" x:Name="OutputBox"/>
     </Grid>
 </Window>
