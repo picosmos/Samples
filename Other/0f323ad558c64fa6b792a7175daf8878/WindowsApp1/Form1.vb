@@ -13,11 +13,11 @@ Public Class Form1
 
         b = New FormB()
         b.Show(Me.Panel1, DockState.Document)
-        'AddHandler b.MyTextChanged, b_MyTextChanged
+        AddHandler b.MyTextChanged, AddressOf b_MyTextChanged
 
     End Sub
 
-    Private Sub MyTextChanged(sender As Object, e As String)
+    Private Sub b_MyTextChanged(sender As Object, e As String)
         a.ShowNewText(e)
     End Sub
 
