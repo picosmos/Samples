@@ -1,0 +1,18 @@
+﻿<Window x:Class="_080d9e05e17f43298e63b9aa00914f79.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_080d9e05e17f43298e63b9aa00914f79"
+        mc:Ignorable="d" Loaded="Page_Loaded" x:Name="page"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <DataGrid x:Name="dgPerson" Height="780" AutoGenerateColumns="False" Margin="10,40,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Vorn}" Header="Vorname" IsReadOnly="{Binding DataContext.Admin, ElementName=page}"/>
+                <DataGridTextColumn Binding="{Binding Name}" Width="280" Header="Name" IsReadOnly="{Binding Admin}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
