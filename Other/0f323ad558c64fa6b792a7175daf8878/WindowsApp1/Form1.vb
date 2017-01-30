@@ -17,8 +17,8 @@ Public Class Form1
 
     End Sub
 
-    Private Sub b_MyTextChanged(sender As Object, e As String)
-        a.ShowNewText(e)
+    Private Sub b_MyTextChanged(sender As Object, e As MyEventArgs)
+        a.ShowNewText(e.MyString)
     End Sub
 
 End Class
