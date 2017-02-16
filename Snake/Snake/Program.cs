@@ -1,52 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
+    using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
     using System.Threading;
 
-    class Program
+    internal class Program
     {
-        static void Main(String[] args)
+        private static void Main()
         {
             var t = new Thread(KeyboardListener);
             t.Start();
-            var game = new Game(20, 10);
-            game.Display = new ConsoleDisplay();
+            var game = new Game(20, 10)
+            {
+                Display = new ConsoleDisplay()
+            };
             game.AddItem();
             foreach (var step in game)
             {
-                game.TrySetDirection(NewDirection);
+                game.TrySetDirection(newDirection);
                 Thread.Sleep(500);
             }
         }
 
-        static volatile Direction NewDirection = Direction.Down;
+        private static volatile Direction newDirection = Direction.Down;
 
-        static void KeyboardListener()
+        private static volatile Boolean exitProgram = false;
+
+        private static void KeyboardListener()
         {
-            while (true)
+            while (!exitProgram)
             {
                 var key = Console.ReadKey();
                 switch (key.Key)
                 {
                     case ConsoleKey.LeftArrow:
-                        NewDirection = Direction.Left;
+                        newDirection = Direction.Left;
                         break;
                     case ConsoleKey.RightArrow:
-                        NewDirection = Direction.Right;
+                        newDirection = Direction.Right;
                         break;
                     case ConsoleKey.UpArrow:
-                        NewDirection = Direction.Up;
+                        newDirection = Direction.Up;
                         break;
                     case ConsoleKey.DownArrow:
-                        NewDirection = Direction.Down;
+                        newDirection = Direction.Down;
                         break;
                 }
             }
+            // ReSharper disable once FunctionNeverReturns
         }
     }
 
@@ -143,11 +147,11 @@ namespace ConsoleApp1
 
         public void Reset()
         {
-            var width = this.BlockStates.GetLength(0);
-            var height = this.BlockStates.GetLength(1);
-            for (var cx = 0; cx < width; ++cx)
+            var w = this.BlockStates.GetLength(0);
+            var h = this.BlockStates.GetLength(1);
+            for (var cx = 0; cx < w; ++cx)
             {
-                for (var cy = 0; cy < height; ++cy)
+                for (var cy = 0; cy < h; ++cy)
                 {
                     this.BlockStates[cx, cy] = BlockState.Empty;
                 }
@@ -192,7 +196,7 @@ namespace ConsoleApp1
             this.Grow(1, direction);
         }
 
-        Position CreateFromOldStart(Position position, Direction direction)
+        private Position CreateFromOldStart(Position position, Direction direction)
         {
             Int32 cx = 0, cy = 0;
             switch (direction)
@@ -248,6 +252,7 @@ namespace ConsoleApp1
     public class Position
     {
         public Int32 X { get; set; }
+
         public Int32 Y { get; set; }
     }
 
