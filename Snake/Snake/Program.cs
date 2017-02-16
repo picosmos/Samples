@@ -50,6 +50,7 @@
                         break;
                 }
             }
+
             // ReSharper disable once FunctionNeverReturns
         }
     }
@@ -202,42 +203,38 @@
             switch (direction)
             {
                 case Direction.Left:
-                    x -= 1;
+                    x = this.CycleChange(x, this.width, -1);
                     break;
                 case Direction.Right:
-                    x += 1;
+                    x = this.CycleChange(x, this.width, 1);
                     break;
                 case Direction.Up:
-                    y -= 1;
+                    y = this.CycleChange(y, this.height, -1);
                     break;
                 case Direction.Down:
-                    y += 1;
+                    y = this.CycleChange(y, this.height, 1);
                     break;
                 default:
                     throw new InvalidEnumArgumentException(nameof(direction), (Int32)direction, typeof(Direction));
             }
 
-            if (x < 0)
-            {
-                x = this.width - 1;
-            }
-
-            if (x >= this.width)
-            {
-                x = 0;
-            }
-
-            if (y < 0)
-            {
-                y = this.height - 1;
-            }
-
-            if (y >= this.height)
-            {
-                y = 0;
-            }
-
             return new Position() { X = x, Y = y };
+        }
+
+        private Int32 CycleChange(Int32 current, Int32 max, Int32 change)
+        {
+            current += change;
+            while (current < 0)
+            {
+                current += max;
+            }
+
+            while (current >= max)
+            {
+                current -= max;
+            }
+
+            return current;
         }
 
         private Position Pop()
