@@ -50,8 +50,6 @@
                         break;
                 }
             }
-
-            // ReSharper disable once FunctionNeverReturns
         }
     }
 
