@@ -180,11 +180,11 @@
             this.Reset();
         }
 
+        private readonly Int32 width;
+
+        private readonly Int32 height;
+
         private List<Position> positions;
-
-        private Int32 width;
-
-        private Int32 height;
 
         public Int32 Length => this.positions.Count;
 
@@ -198,26 +198,46 @@
 
         private Position CreateFromOldStart(Position position, Direction direction)
         {
-            Int32 cx = 0, cy = 0;
+            Int32 x = position.X, y = position.Y;
             switch (direction)
             {
                 case Direction.Left:
-                    cx = -1;
+                    x -= 1;
                     break;
                 case Direction.Right:
-                    cx = 1;
+                    x += 1;
                     break;
                 case Direction.Up:
-                    cy = -1;
+                    y -= 1;
                     break;
                 case Direction.Down:
-                    cy = 1;
+                    y += 1;
                     break;
                 default:
                     throw new InvalidEnumArgumentException(nameof(direction), (Int32)direction, typeof(Direction));
             }
 
-            return new Position() { X = position.X + cx, Y = position.Y + cy };
+            if (x < 0)
+            {
+                x = this.width - 1;
+            }
+
+            if (x >= this.width)
+            {
+                x = 0;
+            }
+
+            if (y < 0)
+            {
+                y = this.height - 1;
+            }
+
+            if (y >= this.height)
+            {
+                y = 0;
+            }
+
+            return new Position() { X = x, Y = y };
         }
 
         private Position Pop()
