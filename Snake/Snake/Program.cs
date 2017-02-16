@@ -11,6 +11,7 @@ namespace Koopakiller.Apps.Snake
              * Different color for every player
              * Collision detection for snakes
              * Better render engine. Update only changed elements
+             * don't spawn items inside the snake
              */
 
             var t = new Thread(KeyboardListener);
