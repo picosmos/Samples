@@ -21,7 +21,7 @@
             foreach (var step in game)
             {
                 game.TrySetDirection(newDirection);
-                Thread.Sleep(500);
+                Thread.Sleep(250);
             }
         }
 
