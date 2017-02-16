@@ -7,6 +7,12 @@ namespace Koopakiller.Apps.Snake
     {
         private static void Main()
         {
+            /* TODO:
+             * Different color for every player
+             * Collision detection for snakes
+             * Better render engine. Update only changed elements
+             */
+
             var t = new Thread(KeyboardListener);
             t.Start();
             var game = new Game(20, 10, 2)
