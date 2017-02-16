@@ -7,12 +7,15 @@ namespace Koopakiller.Apps.Snake
 
     public class Snake
     {
-        public Snake(Int32 width, Int32 height)
+        public Snake(Int32 width, Int32 height, int id)
         {
             this.width = width;
             this.height = height;
+            this.Id = id;
             this.Reset();
         }
+
+        public int Id { get; }
 
         private readonly Int32 width;
 
@@ -103,17 +106,17 @@ namespace Koopakiller.Apps.Snake
             return result;
         }
 
-        public event EventHandler<Position> BlockRemoved;
+        public event Action<Snake, Position> BlockRemoved;
 
-        public event EventHandler<Position> BlockAdded;
+        public event Action<Snake, Position> BlockAdded;
 
         public void Reset()
         {
             this.positions = new List<Position>
-                                 {
-                                     new Position() { X = 1, Y = 1 },
-                                     new Position() { X = 1, Y = 2 },
-                                 };
+            {
+                new Position() { X = 1 + this.Id * 2, Y = 1 },
+                new Position() { X = 1 + this.Id * 2, Y = 2 },
+            };
         }
 
         public void Grow(Int32 i)

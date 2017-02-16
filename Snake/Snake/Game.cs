@@ -8,14 +8,19 @@
 
     public class Game : IEnumerable, IEnumerator
     {
-        public Game(Int32 width, Int32 height)
+        public Game(Int32 width, Int32 height, Int32 snakeCount)
         {
             this.width = width;
             this.height = height;
             this.BlockStates = new BlockState[this.width, this.height];
-            this.Snake = new Snake(this.width, this.height);
-            this.Snake.BlockAdded += this.snake_BlockAdded;
-            this.Snake.BlockRemoved += this.snake_BlockRemoved;
+            this.Snakes = new List<Snake>();
+            for (Int32 i = 0; i < snakeCount; ++i)
+            {
+                var snake = new Snake(this.width, this.height, i);
+                snake.BlockAdded += this.snake_BlockAdded;
+                snake.BlockRemoved += this.snake_BlockRemoved;
+                this.Snakes.Add(snake);
+            }
         }
 
         private static readonly Random random = new Random();
@@ -26,23 +31,23 @@
 
         private readonly List<Position> items = new List<Position>();
 
-        public Snake Snake { get; private set; }
+        public IList<Snake> Snakes { get; private set; }
 
-        private void snake_BlockAdded(Object sender, Position e)
+        private void snake_BlockAdded(Snake snake, Position p)
         {
-            this.BlockStates[e.X, e.Y] = BlockState.Snake;
-            var item = this.items.FirstOrDefault(itm => itm.X == e.X && itm.Y == e.Y);
+            this.BlockStates[p.X, p.Y] = BlockState.Snake;
+            var item = this.items.FirstOrDefault(itm => itm.X == p.X && itm.Y == p.Y);
             if (item != null)
             {
                 this.items.Remove(item);
                 this.AddItem();
-                this.Snake.Grow(1);
+                snake.Grow(1);
             }
         }
 
-        private void snake_BlockRemoved(Object sender, Position e)
+        private void snake_BlockRemoved(Snake snake, Position p)
         {
-            this.BlockStates[e.X, e.Y] = BlockState.Empty;
+            this.BlockStates[p.X, p.Y] = BlockState.Empty;
         }
 
         public BlockState[,] BlockStates { get; }
@@ -62,7 +67,10 @@
 
         public Boolean MoveNext()
         {
-            this.Snake.Move();
+            foreach (var snake in this.Snakes)
+            {
+                snake.Move();
+            }
 
             this.Display.DrawBoard(this.BlockStates);
 
@@ -81,7 +89,10 @@
                 }
             }
 
-            this.Snake.Reset();
+            foreach (var snake in this.Snakes)
+            {
+                snake.Reset();
+            }
             this.items.Clear();
         }
 

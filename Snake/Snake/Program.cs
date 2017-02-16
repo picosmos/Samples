@@ -9,19 +9,21 @@ namespace Koopakiller.Apps.Snake
         {
             var t = new Thread(KeyboardListener);
             t.Start();
-            var game = new Game(20, 10)
-                           {
-                               Display = new ConsoleDisplay()
-                           };
+            var game = new Game(20, 10, 2)
+            {
+                Display = new ConsoleDisplay()
+            };
             game.AddItem();
             foreach (var step in game)
             {
-                game.Snake.TrySetDirection(newDirection);
+                game.Snakes[0].TrySetDirection(newDirectionPlayer1);
+                game.Snakes[1].TrySetDirection(newDirectionPlayer2);
                 Thread.Sleep(250);
             }
         }
 
-        private static volatile Direction newDirection = Direction.Down;
+        private static volatile Direction newDirectionPlayer1 = Direction.Down;
+        private static volatile Direction newDirectionPlayer2 = Direction.Down;
 
         private static volatile Boolean exitProgram = false;
 
@@ -32,17 +34,32 @@ namespace Koopakiller.Apps.Snake
                 var key = Console.ReadKey();
                 switch (key.Key)
                 {
+                    // Player 1
                     case ConsoleKey.LeftArrow:
-                        newDirection = Direction.Left;
+                        newDirectionPlayer1 = Direction.Left;
                         break;
                     case ConsoleKey.RightArrow:
-                        newDirection = Direction.Right;
+                        newDirectionPlayer1 = Direction.Right;
                         break;
                     case ConsoleKey.UpArrow:
-                        newDirection = Direction.Up;
+                        newDirectionPlayer1 = Direction.Up;
                         break;
                     case ConsoleKey.DownArrow:
-                        newDirection = Direction.Down;
+                        newDirectionPlayer1 = Direction.Down;
+                        break;
+
+                    // Player 2
+                    case ConsoleKey.A:
+                        newDirectionPlayer2 = Direction.Left;
+                        break;
+                    case ConsoleKey.D:
+                        newDirectionPlayer2 = Direction.Right;
+                        break;
+                    case ConsoleKey.W:
+                        newDirectionPlayer2 = Direction.Up;
+                        break;
+                    case ConsoleKey.S:
+                        newDirectionPlayer2 = Direction.Down;
                         break;
                 }
             }
