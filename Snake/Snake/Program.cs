@@ -57,14 +57,20 @@ namespace ConsoleApp1
             this.width = width;
             this.height = height;
             this.BlockStates = new BlockState[this.width, this.height];
-            this.snake = new Snake();
+            this.snake = new Snake(this.width, this.height);
             this.snake.BlockAdded += this.snake_BlockAdded;
             this.snake.BlockRemoved += this.snake_BlockRemoved;
         }
 
+        private static readonly Random random = new Random();
+
         private readonly Int32 width;
 
         private readonly Int32 height;
+
+        private readonly List<Position> items = new List<Position>();
+
+        private readonly Snake snake;
 
         private void snake_BlockAdded(Object sender, Position e)
         {
@@ -115,10 +121,6 @@ namespace ConsoleApp1
             return true;
         }
 
-        private readonly Snake snake;
-
-        private static readonly Random random = new Random();
-
         public void AddItem()
         {
             var rndX = random.Next(0, this.width);
@@ -127,8 +129,6 @@ namespace ConsoleApp1
             this.BlockStates[rndX, rndY] = BlockState.Item;
             this.items.Add(new Position() { X = rndX, Y = rndY, });
         }
-
-        private readonly List<Position> items = new List<Position>();
 
         #region IEnumerator
 
@@ -169,12 +169,18 @@ namespace ConsoleApp1
 
     public class Snake
     {
-        public Snake()
+        public Snake(Int32 width, Int32 height)
         {
+            this.width = width;
+            this.height = height;
             this.Reset();
         }
 
         private List<Position> positions;
+
+        private Int32 width;
+
+        private Int32 height;
 
         public Int32 Length => this.positions.Count;
 
