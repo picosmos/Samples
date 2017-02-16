@@ -20,7 +20,7 @@
             game.AddItem();
             foreach (var step in game)
             {
-                game.TrySetDirection(newDirection);
+                game.Snake.TrySetDirection(newDirection);
                 Thread.Sleep(250);
             }
         }
@@ -60,9 +60,9 @@
             this.width = width;
             this.height = height;
             this.BlockStates = new BlockState[this.width, this.height];
-            this.snake = new Snake(this.width, this.height);
-            this.snake.BlockAdded += this.snake_BlockAdded;
-            this.snake.BlockRemoved += this.snake_BlockRemoved;
+            this.Snake = new Snake(this.width, this.height);
+            this.Snake.BlockAdded += this.snake_BlockAdded;
+            this.Snake.BlockRemoved += this.snake_BlockRemoved;
         }
 
         private static readonly Random random = new Random();
@@ -73,7 +73,7 @@
 
         private readonly List<Position> items = new List<Position>();
 
-        private readonly Snake snake;
+        public Snake Snake { get; private set; }
 
         private void snake_BlockAdded(Object sender, Position e)
         {
@@ -83,7 +83,7 @@
             {
                 this.items.Remove(item);
                 this.AddItem();
-                this.snake.Grow(1, this.CurrentDirection);
+                this.Snake.Grow(1);
             }
         }
 
@@ -95,34 +95,6 @@
         public BlockState[,] BlockStates { get; }
 
         public IGameDisplay Display { get; set; }
-
-        public Int32 SnakeLength => this.snake.Length;
-
-        public Direction CurrentDirection { get; private set; } = Direction.Down;
-
-        public Boolean TrySetDirection(Direction? newDirection)
-        {
-            if (newDirection == null)
-            {
-                return false;
-            }
-
-            if (newDirection == this.CurrentDirection)
-            {
-                return false;
-            }
-
-            if ((this.CurrentDirection == Direction.Down && newDirection.Value == Direction.Up)
-             || (this.CurrentDirection == Direction.Up && newDirection.Value == Direction.Down)
-             || (this.CurrentDirection == Direction.Left && newDirection.Value == Direction.Right)
-             || (this.CurrentDirection == Direction.Right && newDirection.Value == Direction.Left))
-            {
-                return false;
-            }
-
-            this.CurrentDirection = newDirection.Value;
-            return true;
-        }
 
         public void AddItem()
         {
@@ -137,7 +109,7 @@
 
         public Boolean MoveNext()
         {
-            this.snake.Move(this.CurrentDirection);
+            this.Snake.Move();
 
             this.Display.DrawBoard(this.BlockStates);
 
@@ -156,7 +128,7 @@
                 }
             }
 
-            this.snake.Reset();
+            this.Snake.Reset();
             this.items.Clear();
         }
 
@@ -187,12 +159,38 @@
 
         public Int32 Length => this.positions.Count;
 
-        public void Move(Direction direction)
+        public Direction CurrentDirection { get; private set; } = Direction.Down;
+
+        public Boolean TrySetDirection(Direction? newDirection)
+        {
+            if (newDirection == null)
+            {
+                return false;
+            }
+
+            if (newDirection == this.CurrentDirection)
+            {
+                return false;
+            }
+
+            if ((this.CurrentDirection == Direction.Down && newDirection.Value == Direction.Up)
+             || (this.CurrentDirection == Direction.Up && newDirection.Value == Direction.Down)
+             || (this.CurrentDirection == Direction.Left && newDirection.Value == Direction.Right)
+             || (this.CurrentDirection == Direction.Right && newDirection.Value == Direction.Left))
+            {
+                return false;
+            }
+
+            this.CurrentDirection = newDirection.Value;
+            return true;
+        }
+
+        public void Move()
         {
             var end = this.Pop();
             this.BlockRemoved?.Invoke(this, end);
 
-            this.Grow(1, direction);
+            this.Grow(1);
         }
 
         private Position CreateFromOldStart(Position position, Direction direction)
@@ -255,10 +253,10 @@
             };
         }
 
-        public void Grow(Int32 i, Direction direction)
+        public void Grow(Int32 i)
         {
             var oldStart = this.positions.Last();
-            var newStart = this.CreateFromOldStart(oldStart, direction);
+            var newStart = this.CreateFromOldStart(oldStart, this.CurrentDirection);
             this.positions.Add(newStart);
             this.BlockAdded?.Invoke(this, newStart);
         }
