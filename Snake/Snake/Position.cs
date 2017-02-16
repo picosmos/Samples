@@ -1,4 +1,4 @@
-namespace ConsoleApp1
+namespace Koopakiller.Apps.Snake
 {
     using System;
 
