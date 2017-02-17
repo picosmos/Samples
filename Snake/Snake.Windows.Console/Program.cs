@@ -14,7 +14,6 @@ namespace Koopakiller.Apps.Snake.Windows.Console
              * Collision detection for snakes
              * Better render engine. Update only changed elements
              * don't spawn items inside the snake
-             * PCL
              */
             var t = new Thread(KeyboardListener);
             t.Start();

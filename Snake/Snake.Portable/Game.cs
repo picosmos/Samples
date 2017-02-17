@@ -55,9 +55,14 @@
 
         public void AddItem()
         {
-            var rndX = random.Next(0, this.width);
-            var rndY = random.Next(0, this.height);
-
+            Int32 rndX, rndY;
+            do
+            {
+                rndX = random.Next(0, this.width);
+                rndY = random.Next(0, this.height);
+            }
+            while (this.Snakes.SelectMany(snake => snake.Positions).Any(pos => pos.X == rndX && pos.Y == rndY));
+            
             this.BlockStates[rndX, rndY] = BlockState.Item;
             this.items.Add(new Position() { X = rndX, Y = rndY, });
         }

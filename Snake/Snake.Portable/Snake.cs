@@ -22,11 +22,14 @@ namespace Koopakiller.Apps.Snake.Portable
 
         private readonly Int32 height;
 
-        private List<Position> positions;
+        public IReadOnlyList<Position> Positions => this.WritablePositions;
 
-        public Int32 Length => this.positions.Count;
+        private List<Position> WritablePositions { get; } = new List<Position>();
+
+        public Int32 Length => this.Positions.Count;
 
         public Direction CurrentDirection { get; private set; } = Direction.Down;
+
 
         public Boolean TrySetDirection(Direction? newDirection)
         {
@@ -102,8 +105,8 @@ namespace Koopakiller.Apps.Snake.Portable
 
         private Position Pop()
         {
-            var result = this.positions[0];
-            this.positions.RemoveAt(0);
+            var result = this.WritablePositions[0];
+            this.WritablePositions.RemoveAt(0);
             return result;
         }
 
@@ -113,18 +116,16 @@ namespace Koopakiller.Apps.Snake.Portable
 
         public void Reset()
         {
-            this.positions = new List<Position>
-            {
-                new Position() { X = 1 + this.Id * 2, Y = 1 },
-                new Position() { X = 1 + this.Id * 2, Y = 2 },
-            };
+            this.WritablePositions.Clear();
+            this.WritablePositions.Add(new Position() { X = 1 + this.Id * 2, Y = 1 });
+            this.WritablePositions.Add(new Position() { X = 1 + this.Id * 2, Y = 2 });
         }
 
         public void Grow(Int32 i)
         {
-            var oldStart = this.positions.Last();
+            var oldStart = this.WritablePositions.Last();
             var newStart = this.CreateFromOldStart(oldStart, this.CurrentDirection);
-            this.positions.Add(newStart);
+            this.WritablePositions.Add(newStart);
             this.BlockAdded?.Invoke(this, newStart);
         }
     }
