@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2BEECF1A-3628-4219-958D-8C1E2FB7E8C7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Koopakiller.Apps.Snake</RootNamespace>
-    <AssemblyName>Snake</AssemblyName>
+    <RootNamespace>Koopakiller.Apps.Snake.Windows.Console</RootNamespace>
+    <AssemblyName>Snake.Windows.Console</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,7 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,16 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockState.cs" />
-    <Compile Include="Direction.cs" />
-    <Compile Include="Position.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="ConsoleDisplay.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Snake.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snake.Portable\Snake.Portable.csproj">
+      <Project>{4c797b60-3967-41a9-b901-162347332416}</Project>
+      <Name>Snake.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

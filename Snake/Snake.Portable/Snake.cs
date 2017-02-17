@@ -1,13 +1,14 @@
-namespace Koopakiller.Apps.Snake
+namespace Koopakiller.Apps.Snake.Portable
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq;
+
+    using Koopakiller.Apps.Snake.Portable.Future;
 
     public class Snake
     {
-        public Snake(Int32 width, Int32 height, int id)
+        public Snake(Int32 width, Int32 height, Int32 id)
         {
             this.width = width;
             this.height = height;
@@ -15,7 +16,7 @@ namespace Koopakiller.Apps.Snake
             this.Reset();
         }
 
-        public int Id { get; }
+        public Int32 Id { get; }
 
         private readonly Int32 width;
 

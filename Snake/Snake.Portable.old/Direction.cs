@@ -1,4 +1,4 @@
-namespace Koopakiller.Apps.Snake
+namespace Koopakiller.Apps.Snake.Portable
 {
     public enum Direction
     {

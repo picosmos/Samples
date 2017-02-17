@@ -1,7 +1,9 @@
-namespace Koopakiller.Apps.Snake
+namespace Koopakiller.Apps.Snake.Windows.Console
 {
     using System;
     using System.Threading;
+
+    using Koopakiller.Apps.Snake.Portable;
 
     internal class Program
     {
@@ -14,7 +16,6 @@ namespace Koopakiller.Apps.Snake
              * don't spawn items inside the snake
              * PCL
              */
-
             var t = new Thread(KeyboardListener);
             t.Start();
             var game = new Game(20, 10, 2)
