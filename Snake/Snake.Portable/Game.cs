@@ -16,8 +16,8 @@
             for (Int32 i = 0; i < snakeCount; ++i)
             {
                 var snake = new Snake(this.width, this.height, i);
-                snake.BlockAdded += this.snake_BlockAdded;
-                snake.BlockRemoved += this.snake_BlockRemoved;
+                snake.BlockAdded += this.Snake_BlockAdded;
+                snake.BlockRemoved += this.Snake_BlockRemoved;
                 this.Snakes.Add(snake);
             }
         }
@@ -32,7 +32,7 @@
 
         public IList<Snake> Snakes { get; private set; }
 
-        private void snake_BlockAdded(Snake snake, Position p)
+        private void Snake_BlockAdded(Snake snake, Position p)
         {
             this.BlockStates[p.X, p.Y] = BlockState.Snake;
             var item = this.items.FirstOrDefault(itm => itm.X == p.X && itm.Y == p.Y);
@@ -44,7 +44,7 @@
             }
         }
 
-        private void snake_BlockRemoved(Snake snake, Position p)
+        private void Snake_BlockRemoved(Snake snake, Position p)
         {
             this.BlockStates[p.X, p.Y] = BlockState.Empty;
         }
