@@ -6,8 +6,8 @@ namespace Koopakiller.Apps.Snake.Portable
     {
         public Position(Int32 x, Int32 y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         public Int32 X { get; }
@@ -16,13 +16,13 @@ namespace Koopakiller.Apps.Snake.Portable
 
         public override Int32 GetHashCode()
         {
-            return this.X * 31 ^ this.Y;
+            return X * 31 ^ Y;
         }
 
         public override Boolean Equals(Object obj)
         {
             var pos = obj as Position;
-            return pos != null && pos.X == this.X && pos.Y == this.Y;
+            return pos != null && pos.X == X && pos.Y == Y;
         }
     }
 }

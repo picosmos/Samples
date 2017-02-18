@@ -1,42 +1,62 @@
 ﻿namespace Koopakiller.Apps.Snake.Windows.Console
 {
     using System;
-    using System.ComponentModel;
-
-    using Koopakiller.Apps.Snake.Portable;
+    using Portable;
 
     public class ConsoleDisplay : IGameDisplay
     {
-        public void DrawBoard(BlockState[,] blockStates)
+        public void DrawSnake(Snake newSnake)
         {
-            Console.Clear();
-            var width = blockStates.GetLength(0);
-            var height = blockStates.GetLength(1);
-
-            for (var cy = 0; cy < height; ++cy)
+            foreach (var position in newSnake.Positions)
             {
-                for (var cx = 0; cx < width; ++cx)
-                {
-                    Console.Write(this.BlockStateToChar(blockStates[cx, cy]));
-                }
-
-                Console.WriteLine();
+                DrawAt(position, 'X');
             }
+            ResetCursorPosition();
         }
 
-        private Char BlockStateToChar(BlockState blockState)
+        public void RemoveSnake(Snake snake)
         {
-            switch (blockState)
+            foreach (var position in snake.Positions)
             {
-                case BlockState.Empty:
-                    return ' ';
-                case BlockState.Snake:
-                    return 'X';
-                case BlockState.Item:
-                    return '*';
-                default:
-                    throw new InvalidEnumArgumentException(nameof(blockState), (Int32)blockState, typeof(BlockState));
+                this.ResetPosition(position);
             }
+            ResetCursorPosition();
+        }
+
+        public void DrawItem(Position position)
+        {
+            DrawAt(position, '*');
+            ResetCursorPosition();
+
+        }
+
+        public void ResetPosition(Position position)
+        {
+            DrawAt(position, ' ');
+            ResetCursorPosition();
+        }
+
+        public void Reset()
+        {
+            Console.Clear();
+        }
+
+        private void DrawAt(Position p, Char chr)
+        {
+            this.DrawAt(p.X, p.Y, chr);
+        }
+
+        private void DrawAt(Int32 x, Int32 y, Char chr)
+        {
+            Console.CursorLeft = x;
+            Console.CursorTop = y;
+            Console.Write(chr);
+        }
+
+        private void ResetCursorPosition()
+        {
+            Console.CursorLeft = 0;
+            Console.CursorTop = 0;
         }
     }
 }

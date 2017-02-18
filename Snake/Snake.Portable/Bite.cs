@@ -4,7 +4,7 @@ namespace Koopakiller.Apps.Snake.Portable
     {
         public Bite(Snake bitingSnake)
         {
-            this.BitingSnake = bitingSnake;
+            BitingSnake = bitingSnake;
         }
 
         public Snake BitingSnake { get; }

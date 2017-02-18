@@ -2,6 +2,14 @@
 {
     public interface IGameDisplay
     {
-        void DrawBoard(BlockState[,] blockStates);
+        void DrawSnake(Snake newSnake);
+
+        void RemoveSnake(Snake snake);
+
+        void DrawItem(Position position);
+
+        void ResetPosition(Position position);
+
+        void Reset();
     }
 }

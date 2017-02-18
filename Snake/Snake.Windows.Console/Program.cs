@@ -6,7 +6,7 @@ namespace Koopakiller.Apps.Snake.Windows.Console
     using System;
     using System.Threading;
 
-    using Koopakiller.Apps.Snake.Portable;
+    using Portable;
 
     internal class Program
     {
@@ -15,7 +15,6 @@ namespace Koopakiller.Apps.Snake.Windows.Console
             /* TODO:
              * Different color for every player
              * Collision detection for snakes ( is there still a bug? )
-             * Better render engine. Update only changed elements
              */
             var t = new Thread(KeyboardListener);
             t.Start();
