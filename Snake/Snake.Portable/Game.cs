@@ -95,13 +95,13 @@
 
                         if (this.Snakes[i].Positions.Any(pos => this.Snakes[j].Head.Equals(pos)))
                         {
-                            if (!killedSnakes.TryGetValue(this.Snakes[i], out IReadOnlyList<CauseOfDeath> list))
+                            if (!killedSnakes.TryGetValue(this.Snakes[j], out IReadOnlyList<CauseOfDeath> list))
                             {
                                 list = new List<CauseOfDeath>();
-                                killedSnakes.Add(this.Snakes[i], list);
+                                killedSnakes.Add(this.Snakes[j], list);
                             }
 
-                            ((List<CauseOfDeath>)killedSnakes[this.Snakes[i]]).Add(new Bite(this.Snakes[j]));
+                            ((List<CauseOfDeath>)killedSnakes[this.Snakes[j]]).Add(new Bite(this.Snakes[i]));
                         }
                     }
                 }
