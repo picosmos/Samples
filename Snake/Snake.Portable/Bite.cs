@@ -1,3 +1,5 @@
+using System;
+
 namespace Koopakiller.Apps.Snake.Portable
 {
     public class Bite : CauseOfDeath
@@ -8,5 +10,10 @@ namespace Koopakiller.Apps.Snake.Portable
         }
 
         public Snake BitingSnake { get; }
+
+        public override String ToString()
+        {
+            return $"The snake was biten by snake {this.BitingSnake.Id}";
+        }
     }
 }
