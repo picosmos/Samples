@@ -2,7 +2,7 @@
 {
     public interface IGameDisplay
     {
-        void DrawSnake(Snake newSnake);
+        void DrawSnake(Snake snake);
 
         void RemoveSnake(Snake snake);
 

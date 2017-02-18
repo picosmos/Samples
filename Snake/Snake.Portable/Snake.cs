@@ -12,8 +12,8 @@ namespace Koopakiller.Apps.Snake.Portable
         {
             this.width = width;
             this.height = height;
-            Id = id;
-            Reset();
+            this.Id = id;
+            this.Reset();
         }
 
         public Int32 Id { get; }
@@ -22,13 +22,13 @@ namespace Koopakiller.Apps.Snake.Portable
 
         private readonly Int32 height;
 
-        public IReadOnlyList<Position> Positions => WritablePositions;
+        public IReadOnlyList<Position> Positions => this.WritablePositions;
 
         private List<Position> WritablePositions { get; } = new List<Position>();
 
-        public Position Head => Positions.FirstOrDefault();
+        public Position Head => this.Positions.FirstOrDefault();
 
-        public Int32 Length => Positions.Count;
+        public Int32 Length => this.Positions.Count;
 
         public Direction CurrentDirection { get; private set; } = Direction.Down;
 
@@ -40,29 +40,29 @@ namespace Koopakiller.Apps.Snake.Portable
                 return false;
             }
 
-            if (newDirection == CurrentDirection)
+            if (newDirection == this.CurrentDirection)
             {
                 return false;
             }
 
-            if ((CurrentDirection == Direction.Down && newDirection.Value == Direction.Up)
-                || (CurrentDirection == Direction.Up && newDirection.Value == Direction.Down)
-                || (CurrentDirection == Direction.Left && newDirection.Value == Direction.Right)
-                || (CurrentDirection == Direction.Right && newDirection.Value == Direction.Left))
+            if ((this.CurrentDirection == Direction.Down && newDirection.Value == Direction.Up)
+                || (this.CurrentDirection == Direction.Up && newDirection.Value == Direction.Down)
+                || (this.CurrentDirection == Direction.Left && newDirection.Value == Direction.Right)
+                || (this.CurrentDirection == Direction.Right && newDirection.Value == Direction.Left))
             {
                 return false;
             }
 
-            CurrentDirection = newDirection.Value;
+            this.CurrentDirection = newDirection.Value;
             return true;
         }
 
         public void Move()
         {
-            var end = Pop();
-            BlockRemoved?.Invoke(this, end);
+            var end = this.Pop();
+            this.BlockRemoved?.Invoke(this, end);
 
-            Grow(1);
+            this.Grow(1);
         }
 
         private Position CreateFromOldStart(Position position, Direction direction)
@@ -71,16 +71,16 @@ namespace Koopakiller.Apps.Snake.Portable
             switch (direction)
             {
                 case Direction.Left:
-                    x = CycleChange(x, width, -1);
+                    x = this.CycleChange(x, this.width, -1);
                     break;
                 case Direction.Right:
-                    x = CycleChange(x, width, 1);
+                    x = this.CycleChange(x, this.width, 1);
                     break;
                 case Direction.Up:
-                    y = CycleChange(y, height, -1);
+                    y = this.CycleChange(y, this.height, -1);
                     break;
                 case Direction.Down:
-                    y = CycleChange(y, height, 1);
+                    y = this.CycleChange(y, this.height, 1);
                     break;
                 default:
                     throw new InvalidEnumArgumentException(nameof(direction), (Int32)direction, typeof(Direction));
@@ -107,8 +107,8 @@ namespace Koopakiller.Apps.Snake.Portable
 
         private Position Pop()
         {
-            var result = WritablePositions[0];
-            WritablePositions.RemoveAt(0);
+            var result = this.WritablePositions[0];
+            this.WritablePositions.RemoveAt(0);
             return result;
         }
 
@@ -118,17 +118,17 @@ namespace Koopakiller.Apps.Snake.Portable
 
         public void Reset()
         {
-            WritablePositions.Clear();
-            WritablePositions.Add(new Position(1 + Id * 2, 1));
-            WritablePositions.Add(new Position(1 + Id * 2, 2));
+            this.WritablePositions.Clear();
+            this.WritablePositions.Add(new Position(1 + this.Id * 2, 1));
+            this.WritablePositions.Add(new Position(1 + this.Id * 2, 2));
         }
 
         public void Grow(Int32 i)
         {
-            var oldStart = WritablePositions.Last();
-            var newStart = CreateFromOldStart(oldStart, CurrentDirection);
-            WritablePositions.Add(newStart);
-            BlockAdded?.Invoke(this, newStart);
+            var oldStart = this.WritablePositions.Last();
+            var newStart = this.CreateFromOldStart(oldStart, this.CurrentDirection);
+            this.WritablePositions.Add(newStart);
+            this.BlockAdded?.Invoke(this, newStart);
         }
     }
 }

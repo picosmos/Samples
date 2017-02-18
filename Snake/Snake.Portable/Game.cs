@@ -11,13 +11,13 @@
         {
             this.width = width;
             this.height = height;
-            Snakes = new List<Snake>();
+            this.Snakes = new List<Snake>();
             for (Int32 i = 0; i < snakeCount; ++i)
             {
                 var snake = new Snake(this.width, this.height, i);
-                snake.BlockAdded += Snake_BlockAdded;
-                snake.BlockRemoved += Snake_BlockRemoved;
-                Snakes.Add(snake);
+                snake.BlockAdded += this.Snake_BlockAdded;
+                snake.BlockRemoved += this.Snake_BlockRemoved;
+                this.Snakes.Add(snake);
             }
         }
 
@@ -33,22 +33,22 @@
 
         private void Snake_BlockAdded(Snake snake, Position p)
         {
-            var item = items.FirstOrDefault(itm => itm.X == p.X && itm.Y == p.Y);
+            var item = this.items.FirstOrDefault(itm => itm.X == p.X && itm.Y == p.Y);
             if (item != null)
             {
-                items.Remove(item);
-                AddItem();
+                this.items.Remove(item);
+                this.AddItem();
                 snake.Grow(1);
-                Display.ResetPosition(item);
+                this.Display.ResetPosition(item);
             }
-            Display.DrawSnake(snake);
+            this.Display.DrawSnake(snake);
         }
 
         public event Action<Game, IReadOnlyDictionary<Snake, IReadOnlyList<CauseOfDeath>>> DeathOccured;
 
         private void Snake_BlockRemoved(Snake snake, Position p)
         {
-            Display.ResetPosition(p);
+            this.Display.ResetPosition(p);
         }
 
         public IGameDisplay Display { get; set; }
@@ -58,23 +58,23 @@
             Int32 rndX, rndY;
             do
             {
-                rndX = random.Next(0, width);
-                rndY = random.Next(0, height);
-            } while (Snakes.SelectMany(snake => snake.Positions).Any(pos => pos.X == rndX && pos.Y == rndY));
+                rndX = random.Next(0, this.width);
+                rndY = random.Next(0, this.height);
+            } while (this.Snakes.SelectMany(snake => snake.Positions).Any(pos => pos.X == rndX && pos.Y == rndY));
             
             var position = new Position(rndX, rndY);
-            items.Add(position);
-            Display.DrawItem(position);
+            this.items.Add(position);
+            this.Display.DrawItem(position);
         }
 
         public Boolean MoveNext()
         {
-            foreach (var snake in Snakes)
+            foreach (var snake in this.Snakes)
             {
                 snake.Move();
             }
 
-            CheckForDeadSnakes();
+            this.CheckForDeadSnakes();
 
             return true;
         }
@@ -82,32 +82,32 @@
         private void CheckForDeadSnakes()
         {
             var killedSnakes = new Dictionary<Snake, IReadOnlyList<CauseOfDeath>>();
-            if (Snakes.Count >= 2)
+            if (this.Snakes.Count >= 2)
             {
-                for (var i = 0; i < Snakes.Count; ++i)
+                for (var i = 0; i < this.Snakes.Count; ++i)
                 {
-                    for (var j = 0; j < Snakes.Count; ++j)
+                    for (var j = 0; j < this.Snakes.Count; ++j)
                     {
                         if (i == j)
                         {
                             continue;
                         }
 
-                        if (Snakes[i].Positions.Any(pos => Snakes[j].Head.Equals(pos)))
+                        if (this.Snakes[i].Positions.Any(pos => this.Snakes[j].Head.Equals(pos)))
                         {
-                            if (!killedSnakes.TryGetValue(Snakes[i], out IReadOnlyList<CauseOfDeath> list))
+                            if (!killedSnakes.TryGetValue(this.Snakes[i], out IReadOnlyList<CauseOfDeath> list))
                             {
                                 list = new List<CauseOfDeath>();
-                                killedSnakes.Add(Snakes[i], list);
+                                killedSnakes.Add(this.Snakes[i], list);
                             }
 
-                            ((List<CauseOfDeath>)killedSnakes[Snakes[i]]).Add(new Bite(Snakes[j]));
+                            ((List<CauseOfDeath>)killedSnakes[this.Snakes[i]]).Add(new Bite(this.Snakes[j]));
                         }
                     }
                 }
             }
 
-            foreach (var snake in Snakes)
+            foreach (var snake in this.Snakes)
             {
                 for (var i = 1; i < snake.Positions.Count; i++)
                 {
@@ -130,27 +130,27 @@
 
             if (killedSnakes.Any())
             {
-                DeathOccured?.Invoke(this, killedSnakes);
+                this.DeathOccured?.Invoke(this, killedSnakes);
             }
 
             foreach (var (killedSnake, _) in killedSnakes)
             {
-                Snakes.Remove(killedSnake);
+                this.Snakes.Remove(killedSnake);
                 this.Display.RemoveSnake(killedSnake);
             }
         }
 
         public void Reset()
         {
-            Display.Reset();
+            this.Display.Reset();
 
-            foreach (var snake in Snakes)
+            foreach (var snake in this.Snakes)
             {
                 snake.Reset();
-                Display.DrawSnake(snake);
+                this.Display.DrawSnake(snake);
             }
 
-            items.Clear();
+            this.items.Clear();
         }
 
         public Object Current { get; } = null;

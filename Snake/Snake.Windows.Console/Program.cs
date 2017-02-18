@@ -13,14 +13,19 @@ namespace Koopakiller.Apps.Snake.Windows.Console
         private static void Main()
         {
             /* TODO:
-             * Different color for every player
              * Collision detection for snakes ( is there still a bug? )
              */
             var t = new Thread(KeyboardListener);
             t.Start();
-            var game = new Game(20, 10, 2)
+            var game = new Game(20, 10, 2);
+            game.Display = new ConsoleDisplay(20,10)
             {
-                Display = new ConsoleDisplay()
+                DefaultColor = ConsoleColor.Gray,
+                SnakeColors =
+                {
+                    [game.Snakes[0]] = ConsoleColor.Cyan,
+                    [game.Snakes[1]] = ConsoleColor.Yellow,
+                }
             };
             game.DeathOccured += Game_DeathOccured;
             game.AddItem();
