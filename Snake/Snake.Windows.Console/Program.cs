@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+
 namespace Koopakiller.Apps.Snake.Windows.Console
 {
     using System;
@@ -11,7 +14,7 @@ namespace Koopakiller.Apps.Snake.Windows.Console
         {
             /* TODO:
              * Different color for every player
-             * Collision detection for snakes
+             * Collision detection for snakes ( is there still a bug? )
              * Better render engine. Update only changed elements
              */
             var t = new Thread(KeyboardListener);
@@ -20,12 +23,25 @@ namespace Koopakiller.Apps.Snake.Windows.Console
             {
                 Display = new ConsoleDisplay()
             };
+            game.DeathOccured += Game_DeathOccured;
             game.AddItem();
             foreach (var step in game)
             {
-                game.Snakes[0].TrySetDirection(newDirectionPlayer1);
-                game.Snakes[1].TrySetDirection(newDirectionPlayer2);
+                (game.Snakes.Count >= 1 ? game.Snakes : null)?[0]?.TrySetDirection(newDirectionPlayer1);
+                (game.Snakes.Count >= 2 ? game.Snakes : null)?[1]?.TrySetDirection(newDirectionPlayer2);
                 Thread.Sleep(250);
+            }
+        }
+
+        private static void Game_DeathOccured(Game game, IReadOnlyDictionary<Snake, IReadOnlyList<CauseOfDeath>> deaths)
+        {
+            foreach (var (snake, causes) in deaths)
+            {
+                Debug.WriteLine($"Snake {snake.Id} died because:");
+                foreach (var cause in causes)
+                {
+                    Debug.WriteLine($" - {cause}");
+                }
             }
         }
 

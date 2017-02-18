@@ -26,6 +26,8 @@ namespace Koopakiller.Apps.Snake.Portable
 
         private List<Position> WritablePositions { get; } = new List<Position>();
 
+        public Position Head => this.Positions.FirstOrDefault();
+
         public Int32 Length => this.Positions.Count;
 
         public Direction CurrentDirection { get; private set; } = Direction.Down;
@@ -84,7 +86,7 @@ namespace Koopakiller.Apps.Snake.Portable
                     throw new InvalidEnumArgumentException(nameof(direction), (Int32)direction, typeof(Direction));
             }
 
-            return new Position() { X = x, Y = y };
+            return new Position(x, y);
         }
 
         private Int32 CycleChange(Int32 current, Int32 max, Int32 change)
@@ -117,8 +119,8 @@ namespace Koopakiller.Apps.Snake.Portable
         public void Reset()
         {
             this.WritablePositions.Clear();
-            this.WritablePositions.Add(new Position() { X = 1 + this.Id * 2, Y = 1 });
-            this.WritablePositions.Add(new Position() { X = 1 + this.Id * 2, Y = 2 });
+            this.WritablePositions.Add(new Position(1 + this.Id * 2, 1));
+            this.WritablePositions.Add(new Position(1 + this.Id * 2, 2));
         }
 
         public void Grow(Int32 i)
