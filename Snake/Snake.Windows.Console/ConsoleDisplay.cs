@@ -38,12 +38,40 @@ namespace Koopakiller.Apps.Snake.Windows.Console
         {
             if (pos == snake.Positions.Count - 1)
             {
-                return 'O'; //Head
+                if (snake.Positions[snake.Positions.Count - 1].X == snake.Positions[snake.Positions.Count - 2].X)
+                {
+                    if (snake.Positions[snake.Positions.Count - 1].Y > snake.Positions[snake.Positions.Count - 2].Y)
+                    {
+                        return 'O'; // down
+                    }
+                    else
+                    {
+                        return 'O'; // up
+                    }
+                }
+                else
+                {
+                    if (snake.Positions[snake.Positions.Count - 1].X > snake.Positions[snake.Positions.Count - 2].X)
+                    {
+                        return 'O'; // right
+                    }
+                    else
+                    {
+                        return 'O'; // left
+                    }
+                }
             }
 
             if (pos == 0)
             {
-                return 'X'; //End
+                if (snake.Positions[1].X == snake.Positions[0].X)
+                {
+                    return '│';
+                }
+                else
+                {
+                    return '─';
+                }
             }
 
             (Int32, Int32) normIntoRange(Int32 a, Int32 b, Int32 norm) => Math.Abs(a - b) <= 2 ? (a, b) : (a < b ? (a + norm, b) : (a, b + norm));
@@ -52,17 +80,17 @@ namespace Koopakiller.Apps.Snake.Windows.Console
 
             if (nx == px)
             {
-                return '│';
+                return '║';
             }
             if (ny == py)
             {
-                return '─';
+                return '═';
             }
             
             var sum = (snake.Positions[pos + 1].X == snake.Positions[pos].X ? 0b001 : 0)
                     + (py > ny ? 0b100 : 0)
                     + (px > nx ? 0b010 : 0) ;
-            return new[] {'┐', '└', '┌', '┘'}[sum >= 4 ? -sum + 7 : sum];
+            return new[] { '╗', '╚', '╔', '╝' }[sum >= 4 ? -sum + 7 : sum];
         }
 
         public void RemoveSnake(Snake snake)
