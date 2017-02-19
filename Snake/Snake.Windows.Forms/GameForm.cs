@@ -22,6 +22,7 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
 
         private void GameForm_Paint(Object sender, PaintEventArgs e)
         {
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 32, 32, 32)), 0, 0, this.Width, this.Height);
             for (var col = 0; col < this.widthInBlocks; ++col)
             {
                 e.Graphics.DrawLine(Pens.Teal, col * this.pixelPerBlock, 0, col * this.pixelPerBlock, this.Height);
