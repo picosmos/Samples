@@ -1,4 +1,4 @@
-﻿namespace Snake.Windows.Forms
+﻿namespace Koopakiller.Apps.Snake.Windows.Forms
 {
     partial class Form1
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }

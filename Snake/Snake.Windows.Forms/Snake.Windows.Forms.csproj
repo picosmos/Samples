@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D53051BC-FDDA-4FE1-8754-C60BC8755800}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Snake.Windows.Forms</RootNamespace>
+    <RootNamespace>Koopakiller.Apps.Snake.Windows.Forms</RootNamespace>
     <AssemblyName>Snake.Windows.Forms</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -61,6 +61,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
