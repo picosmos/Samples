@@ -17,8 +17,7 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
 
         private void GameForm_Load(Object sender, EventArgs e)
         {
-            this.Width = this.widthInBlocks * this.pixelPerBlock;
-            this.Height = this.heightInBlocks * this.pixelPerBlock;
+            this.ClientSize = new Size(this.widthInBlocks * this.pixelPerBlock, this.heightInBlocks * this.pixelPerBlock);
         }
 
         private void GameForm_Paint(Object sender, PaintEventArgs e)
