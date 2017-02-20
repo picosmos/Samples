@@ -27,16 +27,16 @@
 
         private readonly Int32 height;
 
-        private readonly List<Position> items = new List<Position>();
+        public IList<Position> Items { get; } = new List<Position>();
 
-        public IList<Snake> Snakes { get; private set; }
+        public IList<Snake> Snakes { get; }
 
         private void Snake_BlockAdded(Snake snake, Position p)
         {
-            var item = this.items.FirstOrDefault(itm => itm.X == p.X && itm.Y == p.Y);
+            var item = this.Items.FirstOrDefault(itm => itm.X == p.X && itm.Y == p.Y);
             if (item != null)
             {
-                this.items.Remove(item);
+                this.Items.Remove(item);
                 this.AddItem();
                 snake.Grow(1);
                 this.Display.ResetPosition(item);
@@ -61,9 +61,9 @@
                 rndX = random.Next(0, this.width);
                 rndY = random.Next(0, this.height);
             } while (this.Snakes.SelectMany(snake => snake.Positions).Any(pos => pos.X == rndX && pos.Y == rndY));
-            
+
             var position = new Position(rndX, rndY);
-            this.items.Add(position);
+            this.Items.Add(position);
             this.Display.DrawItem(position);
         }
 
@@ -150,7 +150,7 @@
                 this.Display.DrawSnake(snake);
             }
 
-            this.items.Clear();
+            this.Items.Clear();
         }
 
         public Object Current { get; } = null;
