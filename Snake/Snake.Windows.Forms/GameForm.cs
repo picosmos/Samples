@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Koopakiller.Apps.Snake.Portable;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Koopakiller.Apps.Snake.Windows.Forms
 {
@@ -20,7 +21,7 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
 
         private readonly Game game;
 
-        private readonly Dictionary<Int32, Brush> snakeBrushes =new Dictionary<Int32, Brush>()
+        private readonly Dictionary<Int32, Brush> snakeBrushes = new Dictionary<Int32, Brush>()
         {
             [0] = new SolidBrush(Color.Green),
             [1] = new SolidBrush(Color.Yellow),
@@ -58,7 +59,7 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
 
         void DrawEmptyBlock(Graphics g, Int32 col, Int32 row)
         {
-            this.DrawBlock(g,col,row,new SolidBrush(Color.FromArgb(255, 32, 32, 32)));
+            this.DrawBlock(g, col, row, new SolidBrush(Color.FromArgb(255, 32, 32, 32)));
         }
 
         void DrawSnakeBlock(Graphics g, Int32 col, Int32 row, Brush brush)
@@ -111,6 +112,15 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
         private void addItemToolStripMenuItem_Click(Object sender, EventArgs e)
         {
             this.game.AddItem();
+        }
+
+        private void ChangePlayerDirectionClick(Object sender, EventArgs e)
+        {
+            var tsmi = (ToolStripMenuItem) sender;
+            var tagParts = tsmi.Tag.ToString().Split('_');
+            var snakeId = Int32.Parse(tagParts[0]) - 1;
+            var direction = (Direction)Enum.Parse(typeof(Direction), tagParts[1]);
+            this.game.Snakes.FirstOrDefault(snake => snake.Id == snakeId)?.TrySetDirection(direction);
         }
     }
 }
