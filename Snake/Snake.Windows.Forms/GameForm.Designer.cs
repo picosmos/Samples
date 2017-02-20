@@ -32,19 +32,19 @@
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextIterationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.GamePanel = new System.Windows.Forms.Panel();
-            this.player1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.upToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.player1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.upToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startNewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GamePanel = new System.Windows.Forms.Panel();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,16 +73,102 @@
             // nextIterationToolStripMenuItem
             // 
             this.nextIterationToolStripMenuItem.Name = "nextIterationToolStripMenuItem";
-            this.nextIterationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nextIterationToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.nextIterationToolStripMenuItem.Text = "Next Iteration";
             this.nextIterationToolStripMenuItem.Click += new System.EventHandler(this.nextIterationToolStripMenuItem_Click);
             // 
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.addItemToolStripMenuItem.Text = "Add Item";
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem5});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 22);
+            this.toolStripMenuItem1.Text = "Player 1";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(105, 22);
+            this.toolStripMenuItem2.Tag = "1_Left";
+            this.toolStripMenuItem2.Text = "Left";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(105, 22);
+            this.toolStripMenuItem3.Tag = "1_Right";
+            this.toolStripMenuItem3.Text = "Right";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(105, 22);
+            this.toolStripMenuItem4.Tag = "1_Down";
+            this.toolStripMenuItem4.Text = "Down";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(105, 22);
+            this.toolStripMenuItem5.Tag = "1_Up";
+            this.toolStripMenuItem5.Text = "Up";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
+            // 
+            // player1ToolStripMenuItem
+            // 
+            this.player1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.leftToolStripMenuItem,
+            this.rightToolStripMenuItem,
+            this.bottomToolStripMenuItem,
+            this.upToolStripMenuItem});
+            this.player1ToolStripMenuItem.Name = "player1ToolStripMenuItem";
+            this.player1ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.player1ToolStripMenuItem.Text = "Player 2";
+            // 
+            // leftToolStripMenuItem
+            // 
+            this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.leftToolStripMenuItem.Tag = "2_Left";
+            this.leftToolStripMenuItem.Text = "Left";
+            this.leftToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
+            // 
+            // rightToolStripMenuItem
+            // 
+            this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.rightToolStripMenuItem.Tag = "2_Right";
+            this.rightToolStripMenuItem.Text = "Right";
+            this.rightToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
+            // 
+            // bottomToolStripMenuItem
+            // 
+            this.bottomToolStripMenuItem.Name = "bottomToolStripMenuItem";
+            this.bottomToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.bottomToolStripMenuItem.Tag = "2_Down";
+            this.bottomToolStripMenuItem.Text = "Down";
+            this.bottomToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
+            // 
+            // upToolStripMenuItem
+            // 
+            this.upToolStripMenuItem.Name = "upToolStripMenuItem";
+            this.upToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.upToolStripMenuItem.Tag = "2_Up";
+            this.upToolStripMenuItem.Text = "Up";
+            this.upToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
             // 
             // debugToolStripMenuItem
             // 
@@ -91,6 +177,13 @@
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.debugToolStripMenuItem.Text = "Game";
+            // 
+            // startNewGameToolStripMenuItem
+            // 
+            this.startNewGameToolStripMenuItem.Name = "startNewGameToolStripMenuItem";
+            this.startNewGameToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.startNewGameToolStripMenuItem.Text = "Start New Game";
+            this.startNewGameToolStripMenuItem.Click += new System.EventHandler(this.startNewGameToolStripMenuItem_Click);
             // 
             // GamePanel
             // 
@@ -101,99 +194,6 @@
             this.GamePanel.TabIndex = 1;
             this.GamePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GamePanelPaint);
             // 
-            // player1ToolStripMenuItem
-            // 
-            this.player1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.leftToolStripMenuItem,
-            this.rightToolStripMenuItem,
-            this.bottomToolStripMenuItem,
-            this.upToolStripMenuItem});
-            this.player1ToolStripMenuItem.Name = "player1ToolStripMenuItem";
-            this.player1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.player1ToolStripMenuItem.Text = "Player 2";
-            // 
-            // leftToolStripMenuItem
-            // 
-            this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.leftToolStripMenuItem.Tag = "2_Left";
-            this.leftToolStripMenuItem.Text = "Left";
-            this.leftToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // rightToolStripMenuItem
-            // 
-            this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rightToolStripMenuItem.Tag = "2_Right";
-            this.rightToolStripMenuItem.Text = "Right";
-            this.rightToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // bottomToolStripMenuItem
-            // 
-            this.bottomToolStripMenuItem.Name = "bottomToolStripMenuItem";
-            this.bottomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.bottomToolStripMenuItem.Tag = "2_Down";
-            this.bottomToolStripMenuItem.Text = "Down";
-            this.bottomToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // upToolStripMenuItem
-            // 
-            this.upToolStripMenuItem.Name = "upToolStripMenuItem";
-            this.upToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.upToolStripMenuItem.Tag = "2_Up";
-            this.upToolStripMenuItem.Text = "Up";
-            this.upToolStripMenuItem.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem5});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem1.Text = "Player 1";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem2.Tag = "1_Left";
-            this.toolStripMenuItem2.Text = "Left";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem3.Tag = "1_Right";
-            this.toolStripMenuItem3.Text = "Right";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem4.Tag = "1_Down";
-            this.toolStripMenuItem4.Text = "Down";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem5.Tag = "1_Up";
-            this.toolStripMenuItem5.Text = "Up";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
-            // 
-            // startNewGameToolStripMenuItem
-            // 
-            this.startNewGameToolStripMenuItem.Name = "startNewGameToolStripMenuItem";
-            this.startNewGameToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.startNewGameToolStripMenuItem.Text = "Start New Game";
-            this.startNewGameToolStripMenuItem.Click += new System.EventHandler(this.startNewGameToolStripMenuItem_Click);
-            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,6 +201,7 @@
             this.ClientSize = new System.Drawing.Size(693, 409);
             this.Controls.Add(this.GamePanel);
             this.Controls.Add(this.MainMenu);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.MainMenu;
             this.MaximizeBox = false;

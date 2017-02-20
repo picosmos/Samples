@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using Koopakiller.Apps.Snake.Portable;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Koopakiller.Apps.Snake.Windows.Forms
 {
@@ -42,6 +44,10 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
                 }
             }
 
+            if (game == null)
+            {
+                return;
+            }
             foreach (var snake in this.game.Snakes)
             {
                 foreach (var position in snake.Positions)
@@ -115,7 +121,7 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
 
         private void ChangePlayerDirectionClick(Object sender, EventArgs e)
         {
-            var tsmi = (ToolStripMenuItem) sender;
+            var tsmi = (ToolStripMenuItem)sender;
             var tagParts = tsmi.Tag.ToString().Split('_');
             var snakeId = Int32.Parse(tagParts[0]) - 1;
             var direction = (Direction)Enum.Parse(typeof(Direction), tagParts[1]);
@@ -124,8 +130,24 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
 
         private void startNewGameToolStripMenuItem_Click(Object sender, EventArgs e)
         {
+            this.timerCancellationTokenSource?.Cancel();
+
             this.game = new Game(20, 10, 2, this);
             this.game.AddItem();
+
+            this.timerCancellationTokenSource = new CancellationTokenSource();
+            Task.Run(() => this.Timer(this.timerCancellationTokenSource));
+        }
+
+        private CancellationTokenSource timerCancellationTokenSource;
+
+        private void Timer(CancellationTokenSource cts)
+        {
+            while (!cts.Token.IsCancellationRequested)
+            {
+                Thread.Sleep(250);
+                this.game.MoveNext();
+            }
         }
     }
 }
