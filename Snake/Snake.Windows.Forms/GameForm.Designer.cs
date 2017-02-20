@@ -44,6 +44,7 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.startNewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,8 +67,8 @@
             this.toolStripMenuItem1,
             this.player1ToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.gameToolStripMenuItem.Text = "Game";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.gameToolStripMenuItem.Text = "Debug";
             // 
             // nextIterationToolStripMenuItem
             // 
@@ -85,9 +86,11 @@
             // 
             // debugToolStripMenuItem
             // 
+            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startNewGameToolStripMenuItem});
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.debugToolStripMenuItem.Text = "Game";
             // 
             // GamePanel
             // 
@@ -184,6 +187,13 @@
             this.toolStripMenuItem5.Text = "Up";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.ChangePlayerDirectionClick);
             // 
+            // startNewGameToolStripMenuItem
+            // 
+            this.startNewGameToolStripMenuItem.Name = "startNewGameToolStripMenuItem";
+            this.startNewGameToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.startNewGameToolStripMenuItem.Text = "Start New Game";
+            this.startNewGameToolStripMenuItem.Click += new System.EventHandler(this.startNewGameToolStripMenuItem_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,6 +232,7 @@
         private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bottomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem upToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startNewGameToolStripMenuItem;
     }
 }
 

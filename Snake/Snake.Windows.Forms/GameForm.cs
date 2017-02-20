@@ -11,7 +11,6 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
     {
         public GameForm()
         {
-            this.game = new Game(20, 10, 2, this);
             this.InitializeComponent();
         }
 
@@ -19,7 +18,7 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
         private Int32 heightInBlocks = 10;
         private Int32 pixelPerBlock = 25;
 
-        private readonly Game game;
+        private Game game;
 
         private readonly Dictionary<Int32, Brush> snakeBrushes = new Dictionary<Int32, Brush>()
         {
@@ -121,6 +120,12 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
             var snakeId = Int32.Parse(tagParts[0]) - 1;
             var direction = (Direction)Enum.Parse(typeof(Direction), tagParts[1]);
             this.game.Snakes.FirstOrDefault(snake => snake.Id == snakeId)?.TrySetDirection(direction);
+        }
+
+        private void startNewGameToolStripMenuItem_Click(Object sender, EventArgs e)
+        {
+            this.game = new Game(20, 10, 2, this);
+            this.game.AddItem();
         }
     }
 }
