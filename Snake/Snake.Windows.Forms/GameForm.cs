@@ -40,30 +40,30 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
             g.DrawLine(Pens.Teal, col * this.pixelPerBlock, row * this.pixelPerBlock, (col + 1) * this.pixelPerBlock, row * this.pixelPerBlock);
             g.DrawLine(Pens.Teal, col * this.pixelPerBlock, row * this.pixelPerBlock, col * this.pixelPerBlock, (row + 1) * this.pixelPerBlock);
         }
-
+        
         public void DrawSnake(Portable.Snake snake)
         {
-            throw new NotImplementedException();
+            this.Invalidate();
         }
 
         public void RemoveSnake(Portable.Snake snake)
         {
-            throw new NotImplementedException();
+            this.Invalidate();
         }
 
         public void DrawItem(Position position)
         {
-            throw new NotImplementedException();
+            this.Invalidate();
         }
 
         public void ResetPosition(Position position)
         {
-            throw new NotImplementedException();
+            this.Invalidate();
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            this.Invalidate();
         }
     }
 }
