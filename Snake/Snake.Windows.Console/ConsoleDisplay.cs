@@ -19,11 +19,11 @@ namespace Koopakiller.Apps.Snake.Windows.Console
 
         public ConsoleColor DefaultColor { get; set; } = ConsoleColor.Gray;
 
-        public Dictionary<Snake, ConsoleColor> SnakeColors { get; } = new Dictionary<Snake, ConsoleColor>();
+        public Dictionary<Int32, ConsoleColor> SnakeColors { get; } = new Dictionary<Int32, ConsoleColor>();
 
         public void DrawSnake(Snake snake)
         {
-            Console.ForegroundColor = this.SnakeColors[snake];
+            Console.ForegroundColor = this.SnakeColors[snake.Id];
 
             for (var i = 0; i < snake.Positions.Count; i++)
             {

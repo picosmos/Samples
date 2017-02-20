@@ -17,16 +17,16 @@ namespace Koopakiller.Apps.Snake.Windows.Console
              */
             var t = new Thread(KeyboardListener);
             t.Start();
-            var game = new Game(20, 10, 2);
-            game.Display = new ConsoleDisplay(20,10)
+            var display = new ConsoleDisplay(20, 10)
             {
                 DefaultColor = ConsoleColor.Gray,
                 SnakeColors =
                 {
-                    [game.Snakes[0]] = ConsoleColor.Cyan,
-                    [game.Snakes[1]] = ConsoleColor.Yellow,
+                    [0] = ConsoleColor.Cyan,
+                    [1] = ConsoleColor.Yellow,
                 }
             };
+            var game = new Game(20, 10, 2, display);
             game.DeathOccured += Game_DeathOccured;
             game.AddItem();
             foreach (var step in game)

@@ -7,10 +7,11 @@
 
     public class Game : IEnumerable, IEnumerator
     {
-        public Game(Int32 width, Int32 height, Int32 snakeCount)
+        public Game(Int32 width, Int32 height, Int32 snakeCount,IGameDisplay display)
         {
             this.width = width;
             this.height = height;
+            this.Display = display;
             this.Snakes = new List<Snake>();
             for (Int32 i = 0; i < snakeCount; ++i)
             {
@@ -51,7 +52,7 @@
             this.Display.ResetPosition(p);
         }
 
-        public IGameDisplay Display { get; set; }
+        public IGameDisplay Display { get; }
 
         public void AddItem()
         {

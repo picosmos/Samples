@@ -33,6 +33,7 @@
             this.nextIterationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GamePanel = new System.Windows.Forms.Panel();
+            this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,8 @@
             // gameToolStripMenuItem
             // 
             this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nextIterationToolStripMenuItem});
+            this.nextIterationToolStripMenuItem,
+            this.addItemToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
             this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.gameToolStripMenuItem.Text = "Game";
@@ -58,8 +60,9 @@
             // nextIterationToolStripMenuItem
             // 
             this.nextIterationToolStripMenuItem.Name = "nextIterationToolStripMenuItem";
-            this.nextIterationToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.nextIterationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nextIterationToolStripMenuItem.Text = "Next Iteration";
+            this.nextIterationToolStripMenuItem.Click += new System.EventHandler(this.nextIterationToolStripMenuItem_Click);
             // 
             // debugToolStripMenuItem
             // 
@@ -75,6 +78,13 @@
             this.GamePanel.Size = new System.Drawing.Size(693, 385);
             this.GamePanel.TabIndex = 1;
             this.GamePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GamePanelPaint);
+            // 
+            // addItemToolStripMenuItem
+            // 
+            this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addItemToolStripMenuItem.Text = "Add Item";
+            this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // GameForm
             // 
@@ -103,6 +113,7 @@
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nextIterationToolStripMenuItem;
         private System.Windows.Forms.Panel GamePanel;
+        private System.Windows.Forms.ToolStripMenuItem addItemToolStripMenuItem;
     }
 }
 
