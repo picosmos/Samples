@@ -26,7 +26,7 @@ namespace Koopakiller.Apps.Snake.Portable
 
         private List<Position> WritablePositions { get; } = new List<Position>();
 
-        public Position Head => this.Positions.FirstOrDefault();
+        public Position Head => this.Positions.LastOrDefault();
 
         public Int32 Length => this.Positions.Count;
 

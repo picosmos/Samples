@@ -110,7 +110,7 @@
 
             foreach (var snake in this.Snakes)
             {
-                for (var i = 1; i < snake.Positions.Count; i++)
+                for (var i = 0; i < snake.Positions.Count - 1; i++)
                 {
                     var pos = snake.Positions[i];
                     if (!snake.Head.Equals(pos))
