@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Koopakiller.Apps.Snake.Portable;
@@ -16,12 +17,12 @@ namespace Koopakiller.Apps.Snake.Windows.Forms
         private Int32 heightInBlocks = 10;
         private Int32 pixelPerBlock = 25;
 
-        private void GameForm_Load(Object sender, EventArgs e)
+        private void GameFormLoad(Object sender, EventArgs e)
         {
-            this.ClientSize = new Size(this.widthInBlocks * this.pixelPerBlock, this.heightInBlocks * this.pixelPerBlock);
+            this.ClientSize = new Size(this.widthInBlocks * this.pixelPerBlock, this.heightInBlocks * this.pixelPerBlock + this.MainMenu.Height);
         }
 
-        private void GameForm_Paint(Object sender, PaintEventArgs e)
+        private void GamePanelPaint(Object sender, PaintEventArgs e)
         {
             e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 32, 32, 32)), 0, 0, this.Width, this.Height);
             for (var col = 0; col < this.widthInBlocks; ++col)
